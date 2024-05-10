@@ -10,6 +10,7 @@ elif number < 0:
 
 else:
     print('is zero')
-print('This statement is always executed')
+
+
 
 
