@@ -2,16 +2,15 @@
 import random
 number = random.randint(-10, 10)
 
+print(number)
+
 if number > 0:
     print('is positive')
 
-elif number == 0:
-    print('is zero')
-
-
-else:
+elif number < 0:
     print('is negative')
 
-    print('This statement is always executed')
+else:
+    print('is zero')
 
 
