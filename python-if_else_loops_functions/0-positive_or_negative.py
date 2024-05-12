@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 
-import random
+numbers = [5, -7, 0, 10, -5]  # Liste des nombres prédéfinis
 
-number = random.randint(-10, 10)
-
-if number == 0:
-    print("0 is zero")
-elif number < 0:
-    print(f"{number} is negative")
-else:
-    print(f"{number} is positive")
+for number in numbers:
+    if number > 0:
+        print(f"{number} is positive")
+    elif number == 0:
+        print("0 is zero")
+    else:
+        print(f"{number} is negative")
