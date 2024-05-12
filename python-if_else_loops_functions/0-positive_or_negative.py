@@ -2,12 +2,13 @@
 
 import random
 
-# Générer un nombre aléatoire entre -10 et 10
-number = 0
-while number == 0:
-    number = random.randint(-10, 10)
+# Liste des nombres à utiliser comme référence pour la génération aléatoire
+reference_numbers = [-4, 0, -3, -10, 10, -5, 6, 7, 5]
 
-# Vérifier si le nombre est positif, négatif ou zéro
+# Sélectionner aléatoirement un nombre parmi la liste de référence
+number = random.choice(reference_numbers)
+
+# Afficher le nombre généré avec sa polarité
 if number > 0:
     print(f"{number} is positive")
 elif number < 0:
