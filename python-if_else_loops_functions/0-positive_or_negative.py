@@ -2,15 +2,12 @@
 
 import random
 
-# Générer un nombre aléatoire entre -10 et 10
-number = random.randint(-10, 10)
+# Initialiser le nombre à zéro pour commencer la boucle
+number = 0
 
-# Si le nombre est zéro, ajuster en conséquence
-if number == 0:
-    if random.choice([True, False]):
-        number += 1
-    else:
-        number -= 1
+# Continuer à générer un nombre aléatoire jusqu'à ce qu'il soit différent de zéro
+while number == 0:
+    number = random.randint(-10, 10)
 
 # Vérifier si le nombre est positif, négatif ou zéro
 if number > 0:
