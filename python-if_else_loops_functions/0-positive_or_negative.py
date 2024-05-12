@@ -2,11 +2,15 @@
 
 import random
 
-# Liste des nombres non nuls entre -10 et 10
-non_zero_numbers = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# Générer un nombre aléatoire entre -10 et 10
+number = random.randint(-10, 10)
 
-# Sélectionner aléatoirement un nombre parmi la liste
-number = random.choice(non_zero_numbers)
+# Si le nombre est zéro, ajuster en conséquence
+if number == 0:
+    if random.choice([True, False]):
+        number += 1
+    else:
+        number -= 1
 
 # Vérifier si le nombre est positif, négatif ou zéro
 if number > 0:
