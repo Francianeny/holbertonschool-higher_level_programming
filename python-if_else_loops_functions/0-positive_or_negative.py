@@ -2,10 +2,8 @@
 
 import random
 
-# Initialiser le nombre à zéro pour commencer la boucle
+# Générer un nombre aléatoire entre -10 et 10
 number = 0
-
-# Continuer à générer un nombre aléatoire jusqu'à ce qu'il soit différent de zéro
 while number == 0:
     number = random.randint(-10, 10)
 
