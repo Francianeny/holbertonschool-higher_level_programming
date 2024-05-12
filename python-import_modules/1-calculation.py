@@ -50,3 +50,12 @@ def div(a, b):
     """
     return a / b
 
+# Définir les valeurs pour a et b
+a = 10
+b = 5
+
+# Appeler les fonctions et afficher les résultats
+print(f"{a} + {b} = {add(a, b)}")
+print(f"{a} - {b} = {sub(a, b)}")
+print(f"{a} * {b} = {mul(a, b)}")
+print(f"{a} / {b} = {div(a, b)}")
