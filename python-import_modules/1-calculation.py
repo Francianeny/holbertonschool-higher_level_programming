@@ -5,13 +5,8 @@ if __name__ == "__main__":
 
     a = 10
     b = 5
-
-    addition_result = calculator_1.add(a, b)
-    subtraction_result = calculator_1.sub(a, b)
-    multiplication_result = calculator_1.mul(a, b)
-    division_result = calculator_1.div(a, b)
-
-    print(addition_result)
-    print(subtraction_result)
-    print(multiplication_result)
-    print(division_result)
+# Appeler les fonctions et afficher les résultats
+print("{} + {} = {:.0f}".format(a, b, calculator_1.add(a, b)))
+print("{} - {} = {:.0f}".format(a, b, calculator_1.sub(a, b)))
+print("{} * {} = {:.0f}".format(a, b, calculator_1.mul(a, b)))
+print("{} / {} = {:.0f}".format(a, b, calculator_1.div(a, b)))
