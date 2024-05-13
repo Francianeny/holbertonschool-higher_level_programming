@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+if __name__ == "__main__":
 # Définir les valeurs pour a et b
 a = 10
 b = 5
