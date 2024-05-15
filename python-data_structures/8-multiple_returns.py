@@ -7,4 +7,4 @@ def multiple_returns(sentence):
         return (0, None)
 
     else:
-        return (len(sentence), sentence[0])  # Return tuple with length and first character
+        return (len(sentence), sentence[0])
