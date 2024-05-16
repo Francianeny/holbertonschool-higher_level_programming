@@ -1,18 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 def print_matrix_integer(matrix=[[]]):
-    for row in matrix:
-        for i in range(len(row)):
-
-
-            print("{:d}".format(row[i]), end=" ")
-            if (i + 1) % len(row) == 0 and row != matrix[-1]:
-                print("")
-
-
-            elif (i + 1) % len(row) == 0:
-                print("")
-                print("")
+    for first in range(len(matrix)):
+        for second in range(len(matrix[first])):
+            print("{:d}".format(matrix[first][second]), end="")
+            if second != len(matrix[0]) - 1:
+                print(" ", end="")
+        print("")
 
 
 
