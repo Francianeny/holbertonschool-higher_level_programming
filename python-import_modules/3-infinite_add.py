@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
-import sys
+from sys import argv
 
-def add_arguments():
-    total = sum(int(arg) for arg in sys.argv[1:])
-    print(total)
+if __name__ == '__main__':
+    sum = 0
+    argument = argv[1:]
+    for args in argument:
+        sum += int(args)
 
-if __name__ == "__main__":
-    add_arguments()
+    print("{}".format(sum))
