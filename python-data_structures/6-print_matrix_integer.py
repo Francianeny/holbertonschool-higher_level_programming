@@ -6,7 +6,7 @@ def print_matrix_integer(matrix=[[]]):
             print("{:d}".format(matrix[first][second]), end="")
             if second != len(matrix[0]) - 1:
                 print(" ", end="")
-        print("")
+        print("i")
 
 
 
