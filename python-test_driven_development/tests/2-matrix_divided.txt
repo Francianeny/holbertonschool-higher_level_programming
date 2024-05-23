@@ -95,3 +95,15 @@ Test missing 1 arg:
     Traceback (most recent call last):
     ...
     TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+
+>>> matrix_divided(100,50)
+2
+
+>>> matrix_divided([[10,20,30],[40,50,60]],[[2,2,2],[5,5,5]])
+[[5,10,15],[8,10,12]]
+
+>>> matrix1 = [[10, 20, 30], [40, 50, 60]]
+>>> matrix2 = [[2, 2, 2], [5, 5, 5]]
+[[5,10,15],[8,10,12]] = matrix_divided(matrix1, matrix2)
+
+
