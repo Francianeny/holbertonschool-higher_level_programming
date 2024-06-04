@@ -110,3 +110,11 @@ Test float overflow:
     Traceback (most recent call last):
     ...
     OverflowError: cannot convert float infinity to integer
+
+>>> add_integer(1, 2)
+3
+
+>>> add_integer(2, 99)
+101
+
+
