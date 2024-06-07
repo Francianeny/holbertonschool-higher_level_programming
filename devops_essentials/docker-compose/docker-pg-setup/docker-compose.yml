@@ -1,0 +1,34 @@
+```yaml
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    networks:
+      - mynetwork
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+
+  admin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=myemail@example.com
+      - PGADMIN_DEFAULT_PASSWORD=mypassword
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-volume:/var/lib/pgadmin
+
+networks:
+  mynetwork:
+
+volumes:
+  db-volume:
+  pgadmin-volume:
+```
