@@ -4,4 +4,4 @@ FROM tv_show_genres a
 LEFT JOIN tv_genres b
 ON a.genre_id = b.id
 GROUP BY a.genre_id
-ORDER BY 2 DESC;
+ORDER BY 2 DESC;#
