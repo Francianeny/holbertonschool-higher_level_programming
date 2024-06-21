@@ -6,4 +6,4 @@ ON a.id = b.genre_id
 LEFT JOIN tv_shows c
 ON b.show_id = c.id
 WHERE c.title = 'Dexter'
-ORDER BY 1 ASC;#
+ORDER BY 1 ASC;
