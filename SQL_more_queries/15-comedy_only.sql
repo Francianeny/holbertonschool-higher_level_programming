@@ -6,4 +6,4 @@ ON A.id = B.show_id
 LEFT JOIN tv_genres C
 ON B.genre_id = C.id
 WHERE C.name = 'Comedy'
-ORDER BY 1 ASC;#
+ORDER BY 1 ASC;
