@@ -4,31 +4,38 @@ services:
   db:
     image: postgres:latest
     environment:
-      - POSTGRES_USER=myuser
-      - POSTGRES_PASSWORD=mypassword
-    networks:
+
+
+POSTGRES_USER: myuser
+
+
+POSTGRES_PASSWORD: mypassword
+
+
+networks:
       - mynetwork
-    volumes:
-      - db-volume:/var/lib/postgresql/data
 
   admin:
     image: dpage/pgadmin4:latest
     environment:
-      - PGADMIN_DEFAULT_EMAIL=myemail@example.com
-      - PGADMIN_DEFAULT_PASSWORD=mypassword
-    depends_on:
-      - db
+      PGADMIN_DEFAULT_EMAIL: myemail@example.com
+      PGADMIN_DEFAULT_PASSWORD: mypassword
+      PGADMIN_LISTEN_ADDRESS: 0.0.0.0
+
+
+PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_SERVER_MODE: 'True'
+
+
+depends_on:
+
+
+- db
     networks:
       - mynetwork
     ports:
-      - "5050:80"
-    volumes:
-      - pgadmin-volume:/var/lib/pgadmin
+      - "5050:5050"
 
 networks:
   mynetwork:
-
-volumes:
-  db-volume:
-  pgadmin-volume:
 ```
