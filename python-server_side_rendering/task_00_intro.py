@@ -19,6 +19,15 @@ def generate_invitations(template, attendees):
         print("Error: attendees must be a list of dictionaries.")
         return
 
+    # Vérification des entrées vides
+    if not template.strip():
+        print("Error: template is empty.")
+        return
+
+    if not attendees:
+        print("Error: attendees list is empty.")
+        return
+
     for attendee in attendees:
         invitation = template.format(
             name=attendee["name"],
@@ -28,4 +37,5 @@ def generate_invitations(template, attendees):
         )
         print(invitation)
         print("-" * 40)  # Séparation entre les invitations
+
 
