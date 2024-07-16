@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# main.py lit le modèle d'invitation et appelle la fonction generate_invitations
+# main.py lit le modèle d'invitation depuis le fichier templaxe.txt et appelle la fonction generate_invitations
 
 from task_00_intro import generate_invitations
 
