@@ -4,7 +4,7 @@ import os
 
 def generate_invitations(template, attendees):
     """
-    Generate and print invitations for each attendee.
+    Generate and write invitations for each attendee to a separate file.
 
     Parameters:
     template (str): The template string with placeholders.
@@ -28,14 +28,17 @@ def generate_invitations(template, attendees):
         print("Error: attendees list is empty.")
         return
 
-    for attendee in attendees:
+    for index, attendee in enumerate(attendees, start=1):
         invitation = template.format(
-            name=attendee["name"],
-            event_title=attendee["event_title"],
-            event_date=attendee["event_date"] if attendee["event_date"] else "TBD",
-            event_location=attendee["event_location"]
+            name=attendee.get("name", "N/A"),
+            event_title=attendee.get("event_title", "N/A"),
+            event_date=attendee.get("event_date", "N/A") if attendee.get("event_date") else "TBD",
+            event_location=attendee.get("event_location", "N/A")
         )
-        print(invitation)
-        print("-" * 40)  # Séparation entre les invitations
+        output_filename = f"output_{index}.txt"
+        with open(output_filename, 'w', encoding='utf-8') as output_file:
+            output_file.write(invitation)
+
+
 
 
