@@ -12,20 +12,20 @@ def generate_invitations(template, attendees):
     """
     # Vérification des types d'entrée
     if not isinstance(template, str):
-        print("Error: template must be a string.")
+        print("Error: Invalid input type. Template must be a string.")
         return
 
     if not isinstance(attendees, list) or not all(isinstance(attendee, dict) for attendee in attendees):
-        print("Error: attendees must be a list of dictionaries.")
+        print("Error: Invalid input type. Attendees must be a list of dictionaries.")
         return
 
     # Vérification des entrées vides
     if not template.strip():
-        print("Error: template is empty.")
+        print("Error: Template is empty, no output files generated.")
         return
 
     if not attendees:
-        print("Error: attendees list is empty.")
+        print("No data provided, no output files generated.")
         return
 
     for index, attendee in enumerate(attendees, start=1):
@@ -38,6 +38,8 @@ def generate_invitations(template, attendees):
         output_filename = f"output_{index}.txt"
         with open(output_filename, 'w', encoding='utf-8') as output_file:
             output_file.write(invitation)
+
+
 
 
 
