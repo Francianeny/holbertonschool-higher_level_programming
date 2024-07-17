@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import json
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -23,14 +22,8 @@ def contact():
 # Route pour rendre la page des éléments
 @app.route('/items')
 def items():
-    # Charger les données depuis items.json
-    with open('items.json', 'r') as f:
-        items_data = json.load(f)
-
-    # Extraire la liste des éléments depuis les données JSON
+    # Exemple d'une liste d'éléments
     items_list = ['Item 1', 'Item 2', 'Item 3']
-
-    # Rendre items.html avec la liste des éléments
     return render_template('items.html', items=items_list)
 
 if __name__ == '__main__':
