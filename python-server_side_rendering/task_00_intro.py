@@ -3,18 +3,12 @@
 import os
 
 def generate_invitations(template, attendees):
-    """
-    Generate and write invitations for each attendee to a separate file.
-
-    Parameters:
-    template (str): The template string with placeholders.
-    attendees (list): A list of dictionaries, each containing details of an attendee.
-    """
-    # Vérification des types d'entrée
-    if not isinstance(template, str):
+    try:
+        # Vérification des types d'entrée
+        if not isinstance(template, str):
         print("Error: Invalid input type. Template must be a string.")
         return
-
+    # Check if attendees is a list of dictionaries
     if not isinstance(attendees, list) or not all(isinstance(attendee, dict) for attendee in attendees):
         print("Error: Invalid input type. Attendees must be a list of dictionaries.")
         return
