@@ -24,15 +24,14 @@ def contact():
 # Route pour rendre la page des éléments
 @app.route('/items')
 def items():
-    # Charger les données depuis items.json
-    with open('items.json', 'r') as f:
-        items_data = json.load(f)
-
-    # Extraire la liste des éléments depuis les données JSON
-    items_list = ['Item 1', 'Item 2', 'Item 3']
-
-    # Rendre items.html avec la liste des éléments
-    return render_template('items.html', items=items_list)
+    try:
+        with open('items.json', 'r') as f:
+            data = json.load(f)
+            items = data.get('items', [])
+    except Exception as e:
+        print("Error reading items.json: {}".format(e))
+        items = []
+    return render_template('items.html', items=items)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
