@@ -6,6 +6,21 @@ import csv
 
 app = Flask(__name__)
 
+# Fonction pour lire et analyser un fichier JSON
+def read_json_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as json_file:
+        data = json.load(json_file)
+    return data
+
+# Fonction pour lire et analyser un fichier CSV
+def read_csv_file(file_path):
+    data = []
+    with open(file_path, 'r', encoding='utf-8') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            data.append(dict(row))
+    return data
+
 # Route to handle /products?source=json&id=<optional_id>
 @app.route('/products')
 def display_products():
@@ -35,7 +50,7 @@ def display_products():
     return render_template('product_display.html', products=filtered_products)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
 
 
 
