@@ -16,6 +16,12 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/items')
+def items():
+    # Exemple d'une liste d'éléments
+    items_list = ['Item 1', 'Item 2', 'Item 3']
+    return render_template('items.html', items=items_list)
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
 
