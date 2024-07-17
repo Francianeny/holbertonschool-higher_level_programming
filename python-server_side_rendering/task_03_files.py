@@ -6,27 +6,29 @@ import csv
 
 app = Flask(__name__)
 
-
 def read_json(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        return json.load(f)
-
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        return str(e)
 
 def read_csv(file_path):
     products = []
-    with open(file_path, 'r', encoding='utf-8', newline='') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            row['id'] = int(row['id'])
-            row['price'] = float(row['price'])
-            products.append(row)
-    return products
-
+    try:
+        with open(file_path, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                row['id'] = int(row['id'])
+                row['price'] = float(row['price'])
+                products.append(row)
+        return products
+    except Exception as e:
+        return str(e)
 
 @app.route('/')
 def home():
-    return render_template('home.html')  # Créez un template home.html pour cette route
-
+    return "Welcome to the Products API. Use /products?source=json or /products?source=csv to view products."
 
 @app.route('/products')
 def display_products():
@@ -36,15 +38,17 @@ def display_products():
     error_message = None
 
     if source == 'json':
-        try:
-            products = read_json('products.json')
-        except Exception as e:
-            error_message = f"Error reading JSON file: {e}"
+        result = read_json('products.json')
+        if isinstance(result, str):
+            error_message = f"Error reading JSON file: {result}"
+        else:
+            products = result
     elif source == 'csv':
-        try:
-            products = read_csv('products.csv')
-        except Exception as e:
-            error_message = f"Error reading CSV file: {e}"
+        result = read_csv('products.csv')
+        if isinstance(result, str):
+            error_message = f"Error reading CSV file: {result}"
+        else:
+            products = result
     else:
         error_message = "Wrong source"
 
@@ -55,9 +59,9 @@ def display_products():
 
     return render_template('product_display.html', products=products, error_message=error_message)
 
-
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
 
