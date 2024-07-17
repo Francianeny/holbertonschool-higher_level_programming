@@ -6,48 +6,52 @@ import csv
 
 app = Flask(__name__)
 
-# Fonction pour lire et analyser un fichier JSON
-def read_json_file(file_path):
-    with open(file_path, 'r', encoding='utf-8') as json_file:
-        data = json.load(json_file)
-    return data
 
-# Fonction pour lire et analyser un fichier CSV
-def read_csv_file(file_path):
-    data = []
-    with open(file_path, 'r', encoding='utf-8') as csv_file:
-        csv_reader = csv.DictReader(csv_file)
-        for row in csv_reader:
-            data.append(dict(row))
-    return data
+def read_json(file_path):
+    with open(file_path, 'r') as f:
+        return json.load(f)
 
-# Route to handle /products?source=json&id=<optional_id>
+
+def read_csv(file_path):
+    products = []
+    with open(file_path, newline='') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row['id'] = int(row['id'])
+            row['price'] = float(row['price'])
+            products.append(row)
+    return products
+
+
 @app.route('/products')
-def display_products():
-    source = request.args.get('source')  # Get the 'source' query parameter
-    id = request.args.get('id')  # Get the 'id' query parameter if provided
+def products():
+    source = request.args.get('source')
+    product_id = request.args.get('id', type=int)
+    products = []
+    error_message = None
 
     if source == 'json':
-        # Read and parse JSON data from products.json
-        with open('products.json', 'r', encoding='utf-8') as json_file:
-            products = json.load(json_file)
+        try:
+            products = read_json('products.json')
+        except Exception as e:
+            error_message = "Error reading JSON file: {}".format(e)
     elif source == 'csv':
-        # Read and parse CSV data from products.csv
-        products = []
-        with open('products.csv', 'r', encoding='utf-8') as csv_file:
-            csv_reader = csv.DictReader(csv_file)
-            for row in csv_reader:
-                products.append(row)
+        try:
+            products = read_csv('products.csv')
+        except Exception as e:
+            error_message = "Error reading CSV file: {}".format(e)
     else:
-        return "Invalid source parameter. Use 'json' or 'csv'."
+        error_message = "Wrong source"
 
-    # Filter products by id if provided
-    if id:
-        filtered_products = [p for p in products if str(p.get('id')) == id]
-    else:
-        filtered_products = products
+    if not error_message and product_id is not None:
+        products = [product for product in products if product['id'] ==
+                    product_id]
+        if not products:
+            error_message = "Product not found"
 
-    return render_template('product_display.html', products=filtered_products)
+    return render_template(
+        'product_display.html', products=products, error_message=error_message)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
