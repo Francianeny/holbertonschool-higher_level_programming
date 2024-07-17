@@ -8,13 +8,13 @@ app = Flask(__name__)
 
 
 def read_json(file_path):
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 
 def read_csv(file_path):
     products = []
-    with open(file_path, newline='') as f:
+    with open(file_path, 'r', encoding='utf-8', newline='') as f:
         reader = csv.DictReader(f)
         for row in reader:
             row['id'] = int(row['id'])
@@ -23,8 +23,13 @@ def read_csv(file_path):
     return products
 
 
+@app.route('/')
+def home():
+    return render_template('home.html')  # Créez un template home.html pour cette route
+
+
 @app.route('/products')
-def products():
+def display_products():
     source = request.args.get('source')
     product_id = request.args.get('id', type=int)
     products = []
@@ -34,27 +39,26 @@ def products():
         try:
             products = read_json('products.json')
         except Exception as e:
-            error_message = "Error reading JSON file: {}".format(e)
+            error_message = f"Error reading JSON file: {e}"
     elif source == 'csv':
         try:
             products = read_csv('products.csv')
         except Exception as e:
-            error_message = "Error reading CSV file: {}".format(e)
+            error_message = f"Error reading CSV file: {e}"
     else:
         error_message = "Wrong source"
 
     if not error_message and product_id is not None:
-        products = [product for product in products if product['id'] ==
-                    product_id]
+        products = [product for product in products if product['id'] == product_id]
         if not products:
             error_message = "Product not found"
 
-    return render_template(
-        'product_display.html', products=products, error_message=error_message)
+    return render_template('product_display.html', products=products, error_message=error_message)
 
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
 
