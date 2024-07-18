@@ -1,2 +1,5 @@
+# Utiliser l'image de base Alpine
 FROM alpine
-CMD echo "Hello World"
+
+# Utiliser la directive CMD pour afficher "Hello, World!" lorsque le conteneur s'exécute
+CMD ["echo", "Hello, World!"]
