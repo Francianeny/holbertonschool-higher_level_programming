@@ -1,41 +1,34 @@
-```yaml
-version: '3'
+version: '3.8'
+
 services:
   db:
     image: postgres:latest
+    container_name: postgres_db
     environment:
-
-
-POSTGRES_USER: myuser
-
-
-POSTGRES_PASSWORD: mypassword
-
-
-networks:
-      - mynetwork
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin_pass
+      POSTGRES_DB: mydatabase
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - pgnetwork
 
   admin:
     image: dpage/pgadmin4:latest
+    container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: myemail@example.com
-      PGADMIN_DEFAULT_PASSWORD: mypassword
-      PGADMIN_LISTEN_ADDRESS: 0.0.0.0
-
-
-PGADMIN_LISTEN_PORT: 5050
-      PGADMIN_SERVER_MODE: 'True'
-
-
-depends_on:
-
-
-- db
-    networks:
-      - mynetwork
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin_pass
+    depends_on:
+      - db
     ports:
-      - "5050:5050"
+      - "8080:80"
+    networks:
+      - pgnetwork
 
 networks:
-  mynetwork:
-```
+  pgnetwork:
+    driver: bridge
+
+volumes:
+  pgdata:
