@@ -8,5 +8,5 @@ RUN apk add --no-cache curl
 COPY config.txt /app/config.txt
 
 # Définir le point d'entrée (facultatif)
-CMD ["/bin/sh"]#
+CMD ["/bin/sh"]
 
